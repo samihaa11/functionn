@@ -1,0 +1,147 @@
+2D ARRAY USING FUNCTION
+1. sum and sub
+#include<stdio.h>
+void addarray(int a[10][10], int b[10][10], int sum[10][10], int row, int col)
+{
+    for(int i=0; i<row; i++)
+    {
+        for(int j=0; j<col; j++)
+        {
+            sum[i][j] = a[i][j] + b[i][j];
+        }
+    }
+}
+void subarray(int a[10][10], int b[10][10], int sub[10][10], int row, int col)
+{
+    for(int i=0; i<row; i++)
+    {
+        for(int j=0; j<col; j++)
+        {
+            sub[i][j] = a[i][j] - b[i][j];
+        }
+    }
+}
+void printarray(int arr[10][10], int row, int col)
+{
+    for(int i=0; i<row; i++)
+    {
+        for(int j=0; j<col; j++)
+        {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    int row, col;
+    int arr1[10][10], arr2[10][10], sum[10][10], sub[10][10];
+    printf("enter the number of rows and cols: ");
+    scanf("%d %d", &row, &col);
+    printf("enter elements of first array:\n");
+
+    for(int i=0; i<row; i++)
+    {
+        for(int j=0; j<col; j++)
+        {
+            scanf("%d", &arr1[i][j]);
+        }
+    }
+    printf("enter elements of 2nd array:\n");
+    for(int i=0; i<row; i++)
+    {
+        for(int j=0; j<col; j++)
+        {
+            scanf("%d+", &arr2[i][j]);
+        }
+    }
+    addarray(arr1, arr2, sum, row, col);
+    subarray(arr1, arr2, sub, row, col);
+    printf("\nsum of arrays:\n");
+    printarray(sum, row, col);
+
+    printf("\nsub of arrays:\n");
+    printarray(sub, row, col);
+}
+
+
+2. sum of each row
+
+#include<stdio.h>
+void rowsum(int matrix[10][10], int row, int col)
+{
+    for(int i=0; i<row; i++)
+    {
+        int sum = 0;
+        for(int j=0; j<col; j++)
+        {
+            sum+=matrix[i][j];
+        }
+        printf("sum of row %d = %d\n", i+1, sum);
+    }
+}
+int main()
+{
+    int row, col;
+    int matrix[10][10];
+    printf("enter rows and cols: ");
+    scanf("%d %d", &row, &col);
+    printf("the elements of the matrix:\n");
+    for(int i=0; i<row; i++)
+    {
+        for(int j=0; j<col; j++)
+        {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+    rowsum(matrix, row, col);
+}
+
+
+3. right diagonal
+
+
+#include<stdio.h>
+int rightdiagonalsum(int arr[10][10], int row, int col)
+{
+    if(row!=col)
+    {
+        printf("right diagonal cannot be printed.\n");
+    }
+    int sum = 0;
+    printf("right diagonal elements: ");
+    for(int i=0; i<row; i++)
+    {
+        for(int j=0; j<col; j++)
+        {
+            if(i+j == col - 1)
+            {
+                printf("%d ", arr[i][j]);
+                sum += arr[i][j];
+            }
+        }
+    }
+}
+int main()
+{
+    int row, col;
+    int arr[10][10];
+
+    printf("Enter number of rows and columns: ");
+    scanf("%d %d", &row, &col);
+
+    printf("Enter matrix elements:\n");
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            scanf("%d", &arr[i][j]);
+        }
+    }
+    int sum = rightdiagonalsum(arr, row, col);
+
+    if (row == col)
+        printf("\nSum of right diagonal = %d\n", sum);
+
+    return 0;
+}
