@@ -1,0 +1,170 @@
+                         -------------------------------------------------------FUNCTION--------------------------------------------------------
+
+
+-----Write a function that takes a pointer to an integer and increments its value by 10.----
+
+#include<stdio.h>
+void increment(int *p)
+{
+    *p = *p+10;//defined
+}
+int main()
+{
+    int num;
+    printf("enter a number; ");
+    scanf("%d", &num);
+    printf("before: %d\n", num);
+    increment(&num);//function call
+    printf("after: %d\n", num);
+}
+
+
+------Write a program where a function receives two pointers to integers and returns their product.------
+
+#include<stdio.h>
+int product(int *a, int *p)
+{
+    return (*a)*(*p);
+}
+int main()
+{
+    int num1, num2;
+    printf("enter 1st number: ");
+    scanf("%d", &num1);
+    printf("enter 2nd number: ");
+    scanf("%d", &num2);
+    int result = product(&num1, &num2);//calling
+    printf("product: %d\n", result);
+}
+
+
+---------Write a function that swaps two numbers using call by reference (pointer parameters).---------
+
+#include<stdio.h>
+void swap(int *a, int *p)
+{
+    int temp = *a;
+    *a = *p;
+    *p = temp;
+}
+int main()
+{
+    int num1, num2;
+    printf("enter 1st number: ");
+    scanf("%d", &num1);
+    printf("enter 2nd number: ");
+    scanf("%d", &num2);
+    printf("before swap: x = %d and y = %d", num1, num2);
+    swap(&num1, &num2);//calling
+    printf("\nafter swap: x = %d and y = %d", num1, num2);
+}
+
+
+----------Write a function that takes an array and its size as arguments (using pointers) and returns the average of the
+          elements.----------
+#include <stdio.h>
+
+// Function to calculate average using pointers
+float findAverage(int *arr, int size) {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum = sum + *(arr + i);  // pointer arithmetic
+    }
+
+    return (float)sum / size;
+}
+
+int main() {
+    int arr[100], n;
+    float avg;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", arr + i);  // pointer version of &arr[i]
+    }
+
+    avg = findAverage(arr, n);
+
+    printf("Average of the array elements: %.2f\n", avg);
+
+    return 0;
+}
+
+
+
+-------Write a function that reverses a string in place using pointers (pass string as parameter).--------
+
+
+#include<stdio.h>
+int stringlength(char *str)
+{
+    int i, len=0;
+    for(int i=0; *(str+i)!='\0'; i++)
+    {
+        len++;
+    }
+    return len;
+}
+void reversestring(char *str)
+{
+    int len = stringlength(str);
+    char temp;
+    int i;
+    for(i=0; i<len/2; i++)
+    {
+        int temp = *(str+i);
+       *(str+i) = *(str+len-i-1);
+        *(str+len-i-1) = temp;
+    }
+}
+int main() {
+    char str[100];
+
+    printf("Enter a string: ");
+    gets(str);
+    reversestring(str);
+    printf("the reversed string is:%s\n", str);
+    return 0;
+}
+
+
+
+------Write a function that counts the digits of the number and reverses the number using pass by reference.-------
+
+#include<stdio.h>
+int countandReverse(int *num)
+{
+    int n = *num;
+    int reversed = 0, count = 0;
+
+    if (n == 0) {
+        *num = 0;
+        return 1;
+    }
+
+    while (n != 0) {
+        reversed = reversed * 10 + (n % 10);
+        n /= 10;
+        count++;
+    }
+
+    *num = reversed;  // Update the number using reference
+    return count;
+}
+int main()
+{
+    int number, digitCount;
+
+    printf("Enter a number: ");
+    scanf("%d", &number);
+
+    digitCount = countandReverse(&number);
+
+    printf("Reversed number: %d\n", number);
+    printf("Number of digits: %d\n", digitCount);
+
+    return 0;
+}
